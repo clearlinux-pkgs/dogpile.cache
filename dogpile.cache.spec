@@ -4,7 +4,7 @@
 #
 Name     : dogpile.cache
 Version  : 0.5.7
-Release  : 22
+Release  : 23
 URL      : https://pypi.python.org/packages/source/d/dogpile.cache/dogpile.cache-0.5.7.tar.gz
 Source0  : https://pypi.python.org/packages/source/d/dogpile.cache/dogpile.cache-0.5.7.tar.gz
 Summary  : A caching front-end based on the Dogpile lock.

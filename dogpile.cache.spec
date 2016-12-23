@@ -4,7 +4,7 @@
 #
 Name     : dogpile.cache
 Version  : 0.6.2
-Release  : 28
+Release  : 29
 URL      : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.2.tar.gz
 Source0  : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.2.tar.gz
 Summary  : A caching front-end based on the Dogpile lock.

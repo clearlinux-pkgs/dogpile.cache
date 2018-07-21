@@ -4,15 +4,18 @@
 #
 Name     : dogpile.cache
 Version  : 0.6.2
-Release  : 32
+Release  : 33
 URL      : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.2.tar.gz
 Source0  : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.2.tar.gz
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : BSD-3-Clause
+Requires: dogpile.cache-python3
+Requires: dogpile.cache-license
 Requires: dogpile.cache-python
 BuildRequires : Mako
 BuildRequires : MarkupSafe
+BuildRequires : buildreq-distutils3
 BuildRequires : dogpile.core
 BuildRequires : nose-python
 BuildRequires : pbr
@@ -20,52 +23,90 @@ BuildRequires : pip
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
-BuildRequires : pytest-cov-python
-BuildRequires : python-dev
 BuildRequires : python-mock
 BuildRequires : python3-dev
 BuildRequires : setuptools
-BuildRequires : six
-BuildRequires : six-python
 BuildRequires : tox
 BuildRequires : virtualenv
 
 %description
-dogpile
 =======
-Dogpile consists of two subsystems, one building on top of the other.
+        
+        Dogpile consists of two subsystems, one building on top of the other.
+        
+        ``dogpile`` provides the concept of a "dogpile lock", a control structure
+        which allows a single thread of execution to be selected as the "creator" of
+        some resource, while allowing other threads of execution to refer to the previous
+        version of this resource as the creation proceeds; if there is no previous
+        version, then those threads block until the object is available.
+        
+        ``dogpile.cache`` is a caching API which provides a generic interface to
+        caching backends of any variety, and additionally provides API hooks which
+        integrate these cache backends with the locking mechanism of ``dogpile``.
+        
+        Overall, dogpile.cache is intended as a replacement to the `Beaker
+
+%package license
+Summary: license components for the dogpile.cache package.
+Group: Default
+
+%description license
+license components for the dogpile.cache package.
+
 
 %package python
 Summary: python components for the dogpile.cache package.
 Group: Default
+Requires: dogpile.cache-python3
 
 %description python
 python components for the dogpile.cache package.
+
+
+%package python3
+Summary: python3 components for the dogpile.cache package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the dogpile.cache package.
 
 
 %prep
 %setup -q -n dogpile.cache-0.6.2
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1484545109
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1532209661
 python3 setup.py build -b py3
 
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages python2 setup.py test || :
+PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
-export SOURCE_DATE_EPOCH=1484545109
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/doc/dogpile.cache
+cp LICENSE %{buildroot}/usr/share/doc/dogpile.cache/LICENSE
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
 
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/dogpile.cache/LICENSE
+
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*

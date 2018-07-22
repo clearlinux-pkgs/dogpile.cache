@@ -4,9 +4,9 @@
 #
 Name     : dogpile.cache
 Version  : 0.6.6
-Release  : 35
-URL      : https://files.pythonhosted.org/packages/48/ca/604154d835c3668efb8a31bd979b0ea4bf39c2934a40ffecc0662296cb51/dogpile.cache-0.6.6.tar.gz
-Source0  : https://files.pythonhosted.org/packages/48/ca/604154d835c3668efb8a31bd979b0ea4bf39c2934a40ffecc0662296cb51/dogpile.cache-0.6.6.tar.gz
+Release  : 36
+URL      : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.6.tar.gz
+Source0  : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.6.tar.gz
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -81,7 +81,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532241186
+export SOURCE_DATE_EPOCH=1532293356
 python3 setup.py build -b py3
 
 %check

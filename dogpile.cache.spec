@@ -4,7 +4,7 @@
 #
 Name     : dogpile.cache
 Version  : 0.6.2
-Release  : 33
+Release  : 34
 URL      : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.2.tar.gz
 Source0  : http://pypi.debian.net/dogpile.cache/dogpile.cache-0.6.2.tar.gz
 Summary  : A caching front-end based on the Dogpile lock.
@@ -80,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532209661
+export SOURCE_DATE_EPOCH=1532217985
 python3 setup.py build -b py3
 
 %check

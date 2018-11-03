@@ -6,30 +6,26 @@
 #
 Name     : dogpile.cache
 Version  : 0.6.7
-Release  : 37
+Release  : 38
 URL      : https://files.pythonhosted.org/packages/ee/bd/440da735a11c6087eed7cc8747fc4b995cbac2464168682f8ee1c8e43844/dogpile.cache-0.6.7.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ee/bd/440da735a11c6087eed7cc8747fc4b995cbac2464168682f8ee1c8e43844/dogpile.cache-0.6.7.tar.gz
 Source99 : https://files.pythonhosted.org/packages/ee/bd/440da735a11c6087eed7cc8747fc4b995cbac2464168682f8ee1c8e43844/dogpile.cache-0.6.7.tar.gz.asc
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: dogpile.cache-python3
-Requires: dogpile.cache-license
-Requires: dogpile.cache-python
+Requires: dogpile.cache-license = %{version}-%{release}
+Requires: dogpile.cache-python = %{version}-%{release}
+Requires: dogpile.cache-python3 = %{version}-%{release}
 Requires: Sphinx
 BuildRequires : Mako
 BuildRequires : MarkupSafe
 BuildRequires : buildreq-distutils3
 BuildRequires : dogpile.core
 BuildRequires : nose-python
-BuildRequires : pbr
-BuildRequires : pip
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
 BuildRequires : python-mock
-BuildRequires : python3-dev
-BuildRequires : setuptools
 BuildRequires : tox
 BuildRequires : virtualenv
 
@@ -61,7 +57,7 @@ license components for the dogpile.cache package.
 %package python
 Summary: python components for the dogpile.cache package.
 Group: Default
-Requires: dogpile.cache-python3
+Requires: dogpile.cache-python3 = %{version}-%{release}
 
 %description python
 python components for the dogpile.cache package.
@@ -84,8 +80,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532694834
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1541266008
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -94,9 +90,9 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/dogpile.cache
-cp LICENSE %{buildroot}/usr/share/doc/dogpile.cache/LICENSE
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/dogpile.cache
+cp LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -105,8 +101,8 @@ echo ----[ mark ]----
 %defattr(-,root,root,-)
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/dogpile.cache/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/dogpile.cache/LICENSE
 
 %files python
 %defattr(-,root,root,-)

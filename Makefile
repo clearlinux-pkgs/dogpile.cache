@@ -1,5 +1,5 @@
 PKG_NAME := dogpile.cache
-URL = https://files.pythonhosted.org/packages/73/bf/0cbed594e4f0f9360bfb98e7276131bf32e1af1d15e6c11a9dd8bd93a12f/dogpile.cache-0.6.8.tar.gz
+URL = https://files.pythonhosted.org/packages/b5/8b/36cd41a5a30759d37390806f4b7b4d5fab2fa7dfc37af5177fc4ab98265b/dogpile.cache-0.7.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

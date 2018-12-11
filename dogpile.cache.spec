@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : dogpile.cache
-Version  : 0.6.8
-Release  : 39
-URL      : https://files.pythonhosted.org/packages/73/bf/0cbed594e4f0f9360bfb98e7276131bf32e1af1d15e6c11a9dd8bd93a12f/dogpile.cache-0.6.8.tar.gz
-Source0  : https://files.pythonhosted.org/packages/73/bf/0cbed594e4f0f9360bfb98e7276131bf32e1af1d15e6c11a9dd8bd93a12f/dogpile.cache-0.6.8.tar.gz
-Source99 : https://files.pythonhosted.org/packages/73/bf/0cbed594e4f0f9360bfb98e7276131bf32e1af1d15e6c11a9dd8bd93a12f/dogpile.cache-0.6.8.tar.gz.asc
+Version  : 0.7.0
+Release  : 40
+URL      : https://files.pythonhosted.org/packages/b5/8b/36cd41a5a30759d37390806f4b7b4d5fab2fa7dfc37af5177fc4ab98265b/dogpile.cache-0.7.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/b5/8b/36cd41a5a30759d37390806f4b7b4d5fab2fa7dfc37af5177fc4ab98265b/dogpile.cache-0.7.0.tar.gz
+Source99 : https://files.pythonhosted.org/packages/b5/8b/36cd41a5a30759d37390806f4b7b4d5fab2fa7dfc37af5177fc4ab98265b/dogpile.cache-0.7.0.tar.gz.asc
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -17,9 +17,11 @@ Requires: dogpile.cache-license = %{version}-%{release}
 Requires: dogpile.cache-python = %{version}-%{release}
 Requires: dogpile.cache-python3 = %{version}-%{release}
 Requires: Sphinx
+Requires: decorator
 BuildRequires : Mako
 BuildRequires : MarkupSafe
 BuildRequires : buildreq-distutils3
+BuildRequires : decorator
 BuildRequires : dogpile.core
 BuildRequires : nose-python
 BuildRequires : pluggy
@@ -73,14 +75,15 @@ python3 components for the dogpile.cache package.
 
 
 %prep
-%setup -q -n dogpile.cache-0.6.8
+%setup -q -n dogpile.cache-0.7.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543135857
+export SOURCE_DATE_EPOCH=1544534944
+export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %check

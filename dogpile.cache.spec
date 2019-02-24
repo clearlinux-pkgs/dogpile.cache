@@ -6,7 +6,7 @@
 #
 Name     : dogpile.cache
 Version  : 0.7.1
-Release  : 44
+Release  : 45
 URL      : https://files.pythonhosted.org/packages/84/3e/dbf1cfc5228f1d3dca80ef714db2c5aaec5cd9efaf54d7e3daef6bc48b19/dogpile.cache-0.7.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/84/3e/dbf1cfc5228f1d3dca80ef714db2c5aaec5cd9efaf54d7e3daef6bc48b19/dogpile.cache-0.7.1.tar.gz
 Source99 : https://files.pythonhosted.org/packages/84/3e/dbf1cfc5228f1d3dca80ef714db2c5aaec5cd9efaf54d7e3daef6bc48b19/dogpile.cache-0.7.1.tar.gz.asc
@@ -16,7 +16,6 @@ License  : BSD-3-Clause
 Requires: dogpile.cache-license = %{version}-%{release}
 Requires: dogpile.cache-python = %{version}-%{release}
 Requires: dogpile.cache-python3 = %{version}-%{release}
-Requires: Sphinx
 Requires: decorator
 BuildRequires : Mako
 BuildRequires : MarkupSafe
@@ -27,26 +26,17 @@ BuildRequires : nose-python
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
+BuildRequires : pytest-cov
+BuildRequires : pytest-cov-python
 BuildRequires : python-mock
 BuildRequires : tox
 BuildRequires : virtualenv
 
 %description
-=======
-        
-        Dogpile consists of two subsystems, one building on top of the other.
-        
-        ``dogpile`` provides the concept of a "dogpile lock", a control structure
-        which allows a single thread of execution to be selected as the "creator" of
-        some resource, while allowing other threads of execution to refer to the previous
-        version of this resource as the creation proceeds; if there is no previous
-        version, then those threads block until the object is available.
-        
-        ``dogpile.cache`` is a caching API which provides a generic interface to
-        caching backends of any variety, and additionally provides API hooks which
-        integrate these cache backends with the locking mechanism of ``dogpile``.
-        
-        Overall, dogpile.cache is intended as a replacement to the `Beaker
+Individual per-changelog files go here in .rst format, which are pulled in by
+changelog (version 0.4.0 or higher) to be rendered into the changelog.rst file.
+At release time, the files here are removed and written directly into the
+changelog.
 
 %package license
 Summary: license components for the dogpile.cache package.
@@ -82,7 +72,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1544662188
+export SOURCE_DATE_EPOCH=1551028806
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 

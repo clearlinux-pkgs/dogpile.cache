@@ -5,14 +5,14 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : dogpile.cache
-Version  : 0.7.1
-Release  : 47
-URL      : https://files.pythonhosted.org/packages/84/3e/dbf1cfc5228f1d3dca80ef714db2c5aaec5cd9efaf54d7e3daef6bc48b19/dogpile.cache-0.7.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/84/3e/dbf1cfc5228f1d3dca80ef714db2c5aaec5cd9efaf54d7e3daef6bc48b19/dogpile.cache-0.7.1.tar.gz
-Source99 : https://files.pythonhosted.org/packages/84/3e/dbf1cfc5228f1d3dca80ef714db2c5aaec5cd9efaf54d7e3daef6bc48b19/dogpile.cache-0.7.1.tar.gz.asc
+Version  : 0.8.0
+Release  : 48
+URL      : https://files.pythonhosted.org/packages/29/e2/f850b80eac4937c6d9ea6a24fac3764d951d82eb5f3e9a8ccd6ac24d70f8/dogpile.cache-0.8.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/29/e2/f850b80eac4937c6d9ea6a24fac3764d951d82eb5f3e9a8ccd6ac24d70f8/dogpile.cache-0.8.0.tar.gz
+Source1 : https://files.pythonhosted.org/packages/29/e2/f850b80eac4937c6d9ea6a24fac3764d951d82eb5f3e9a8ccd6ac24d70f8/dogpile.cache-0.8.0.tar.gz.asc
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
-License  : BSD-3-Clause
+License  : MIT
 Requires: dogpile.cache-license = %{version}-%{release}
 Requires: dogpile.cache-python = %{version}-%{release}
 Requires: dogpile.cache-python3 = %{version}-%{release}
@@ -26,8 +26,6 @@ BuildRequires : nose-python
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
-BuildRequires : pytest-cov
-BuildRequires : pytest-cov-python
 BuildRequires : python-mock
 BuildRequires : tox
 BuildRequires : virtualenv
@@ -65,23 +63,25 @@ python3 components for the dogpile.cache package.
 
 
 %prep
-%setup -q -n dogpile.cache-0.7.1
+%setup -q -n dogpile.cache-0.8.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1551028806
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569251807
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dogpile.cache
 cp LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/LICENSE

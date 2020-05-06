@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : dogpile.cache
-Version  : 0.9.0
-Release  : 52
-URL      : https://files.pythonhosted.org/packages/ac/6a/9ac405686a94b7f009a20a50070a5786b0e1aedc707b88d40d0c4b51a82e/dogpile.cache-0.9.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/ac/6a/9ac405686a94b7f009a20a50070a5786b0e1aedc707b88d40d0c4b51a82e/dogpile.cache-0.9.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/ac/6a/9ac405686a94b7f009a20a50070a5786b0e1aedc707b88d40d0c4b51a82e/dogpile.cache-0.9.0.tar.gz.asc
+Version  : 0.9.2
+Release  : 53
+URL      : https://files.pythonhosted.org/packages/b5/02/9692c82808341747afc87a7c2b701c8eed76c05ec6bc98844c102a537de7/dogpile.cache-0.9.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/b5/02/9692c82808341747afc87a7c2b701c8eed76c05ec6bc98844c102a537de7/dogpile.cache-0.9.2.tar.gz
+Source1  : https://files.pythonhosted.org/packages/b5/02/9692c82808341747afc87a7c2b701c8eed76c05ec6bc98844c102a537de7/dogpile.cache-0.9.2.tar.gz.asc
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : MIT
@@ -26,78 +26,26 @@ BuildRequires : nose-python
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
-BuildRequires : pytest-cov
-BuildRequires : pytest-cov-python
 BuildRequires : python-mock
 BuildRequires : tox
-BuildRequires : util-linux
 BuildRequires : virtualenv
 
 %description
-dogpile
 =======
-
-Dogpile consists of two subsystems, one building on top of the other.
-
-``dogpile`` provides the concept of a "dogpile lock", a control structure
-which allows a single thread of execution to be selected as the "creator" of
-some resource, while allowing other threads of execution to refer to the previous
-version of this resource as the creation proceeds; if there is no previous
-version, then those threads block until the object is available.
-
-``dogpile.cache`` is a caching API which provides a generic interface to
-caching backends of any variety, and additionally provides API hooks which
-integrate these cache backends with the locking mechanism of ``dogpile``.
-
-Overall, dogpile.cache is intended as a replacement to the `Beaker
-<http://beaker.groovie.org>`_ caching system, the internals of which are
-written by the same author.   All the ideas of Beaker which "work" are re-
-implemented in dogpile.cache in a more efficient and succinct manner, and all
-the cruft (Beaker's internals were first written in 2005) relegated to the
-trash heap.
-
-Documentation
--------------
-
-See dogpile.cache's full documentation at
-`dogpile.cache documentation <http://dogpilecache.sqlalchemy.org>`_.  The
-sections below provide a brief synopsis of the ``dogpile`` packages.
-
-Features
---------
-
-* A succinct API which encourages up-front configuration of pre-defined
-  "regions", each one defining a set of caching characteristics including
-  storage backend, configuration options, and default expiration time.
-* A standard get/set/delete API as well as a function decorator API is
-  provided.
-* The mechanics of key generation are fully customizable.   The function
-  decorator API features a pluggable "key generator" to customize how
-  cache keys are made to correspond to function calls, and an optional
-  "key mangler" feature provides for pluggable mangling of keys
-  (such as encoding, SHA-1 hashing) as desired for each region.
-* The dogpile lock, first developed as the core engine behind the Beaker
-  caching system, here vastly simplified, improved, and better tested.
-  Some key performance
-  issues that were intrinsic to Beaker's architecture, particularly that
-  values would frequently be "double-fetched" from the cache, have been fixed.
-* Backends implement their own version of a "distributed" lock, where the
-  "distribution" matches the backend's storage system.  For example, the
-  memcached backends allow all clients to coordinate creation of values
-  using memcached itself.   The dbm file backend uses a lockfile
-  alongside the dbm file.  New backends, such as a Redis-based backend,
-  can provide their own locking mechanism appropriate to the storage
-  engine.
-* Writing new backends or hacking on the existing backends is intended to be
-  routine - all that's needed are basic get/set/delete methods. A distributed
-  lock tailored towards the backend is an optional addition, else dogpile uses
-  a regular thread mutex. New backends can be registered with dogpile.cache
-  directly or made available via setuptools entry points.
-* Included backends feature three memcached backends (python-memcached, pylibmc,
-  bmemcached), a Redis backend, a backend based on Python's
-  anydbm, and a plain dictionary backend.
-* Space for third party plugins, including one which provides the
-  dogpile.cache engine to Mako templates.
+        
+        Dogpile consists of two subsystems, one building on top of the other.
+        
+        ``dogpile`` provides the concept of a "dogpile lock", a control structure
+        which allows a single thread of execution to be selected as the "creator" of
+        some resource, while allowing other threads of execution to refer to the previous
+        version of this resource as the creation proceeds; if there is no previous
+        version, then those threads block until the object is available.
+        
+        ``dogpile.cache`` is a caching API which provides a generic interface to
+        caching backends of any variety, and additionally provides API hooks which
+        integrate these cache backends with the locking mechanism of ``dogpile``.
+        
+        Overall, dogpile.cache is intended as a replacement to the `Beaker
 
 %package license
 Summary: license components for the dogpile.cache package.
@@ -121,26 +69,26 @@ Summary: python3 components for the dogpile.cache package.
 Group: Default
 Requires: python3-core
 Provides: pypi(dogpile.cache)
+Requires: pypi(decorator)
 
 %description python3
 python3 components for the dogpile.cache package.
 
 
 %prep
-%setup -q -n dogpile.cache-0.9.0
-cd %{_builddir}/dogpile.cache-0.9.0
+%setup -q -n dogpile.cache-0.9.2
+cd %{_builddir}/dogpile.cache-0.9.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582920523
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1588787657
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
@@ -149,7 +97,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dogpile.cache
-cp %{_builddir}/dogpile.cache-0.9.0/LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/31b97de0aa7e56ae9820d3930fbe2f93a0403618
+cp %{_builddir}/dogpile.cache-0.9.2/LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/36f7c292180b27f76a08c269d3f77cdf8f7da681
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -160,7 +108,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/dogpile.cache/31b97de0aa7e56ae9820d3930fbe2f93a0403618
+/usr/share/package-licenses/dogpile.cache/36f7c292180b27f76a08c269d3f77cdf8f7da681
 
 %files python
 %defattr(-,root,root,-)

@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : dogpile.cache
-Version  : 0.9.2
-Release  : 54
-URL      : https://files.pythonhosted.org/packages/b5/02/9692c82808341747afc87a7c2b701c8eed76c05ec6bc98844c102a537de7/dogpile.cache-0.9.2.tar.gz
-Source0  : https://files.pythonhosted.org/packages/b5/02/9692c82808341747afc87a7c2b701c8eed76c05ec6bc98844c102a537de7/dogpile.cache-0.9.2.tar.gz
-Source1  : https://files.pythonhosted.org/packages/b5/02/9692c82808341747afc87a7c2b701c8eed76c05ec6bc98844c102a537de7/dogpile.cache-0.9.2.tar.gz.asc
+Version  : 1.0.0
+Release  : 55
+URL      : https://files.pythonhosted.org/packages/ad/a5/3411705a08be9c53bc5400e2a0a35b6a31eb8361556a3b1552899a5d778b/dogpile.cache-1.0.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/ad/a5/3411705a08be9c53bc5400e2a0a35b6a31eb8361556a3b1552899a5d778b/dogpile.cache-1.0.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/ad/a5/3411705a08be9c53bc5400e2a0a35b6a31eb8361556a3b1552899a5d778b/dogpile.cache-1.0.0.tar.gz.asc
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : MIT
@@ -17,6 +17,7 @@ Requires: dogpile.cache-license = %{version}-%{release}
 Requires: dogpile.cache-python = %{version}-%{release}
 Requires: dogpile.cache-python3 = %{version}-%{release}
 Requires: decorator
+Requires: stevedore
 BuildRequires : Mako
 BuildRequires : MarkupSafe
 BuildRequires : buildreq-distutils3
@@ -27,6 +28,7 @@ BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
 BuildRequires : python-mock
+BuildRequires : stevedore
 BuildRequires : tox
 BuildRequires : virtualenv
 
@@ -70,21 +72,22 @@ Group: Default
 Requires: python3-core
 Provides: pypi(dogpile.cache)
 Requires: pypi(decorator)
+Requires: pypi(stevedore)
 
 %description python3
 python3 components for the dogpile.cache package.
 
 
 %prep
-%setup -q -n dogpile.cache-0.9.2
-cd %{_builddir}/dogpile.cache-0.9.2
+%setup -q -n dogpile.cache-1.0.0
+cd %{_builddir}/dogpile.cache-1.0.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1588787657
+export SOURCE_DATE_EPOCH=1595256379
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -97,7 +100,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dogpile.cache
-cp %{_builddir}/dogpile.cache-0.9.2/LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/36f7c292180b27f76a08c269d3f77cdf8f7da681
+cp %{_builddir}/dogpile.cache-1.0.0/LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/36f7c292180b27f76a08c269d3f77cdf8f7da681
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :

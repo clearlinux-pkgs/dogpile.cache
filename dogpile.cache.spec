@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : dogpile.cache
-Version  : 1.0.0
-Release  : 55
-URL      : https://files.pythonhosted.org/packages/ad/a5/3411705a08be9c53bc5400e2a0a35b6a31eb8361556a3b1552899a5d778b/dogpile.cache-1.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/ad/a5/3411705a08be9c53bc5400e2a0a35b6a31eb8361556a3b1552899a5d778b/dogpile.cache-1.0.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/ad/a5/3411705a08be9c53bc5400e2a0a35b6a31eb8361556a3b1552899a5d778b/dogpile.cache-1.0.0.tar.gz.asc
+Version  : 1.0.1
+Release  : 56
+URL      : https://files.pythonhosted.org/packages/8a/d7/89c3115c0420cdea892fe4ed004ee94a9af130f3dcf60d8f55f6b3521a1a/dogpile.cache-1.0.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/8a/d7/89c3115c0420cdea892fe4ed004ee94a9af130f3dcf60d8f55f6b3521a1a/dogpile.cache-1.0.1.tar.gz
+Source1  : https://files.pythonhosted.org/packages/8a/d7/89c3115c0420cdea892fe4ed004ee94a9af130f3dcf60d8f55f6b3521a1a/dogpile.cache-1.0.1.tar.gz.asc
 Summary  : A caching front-end based on the Dogpile lock.
 Group    : Development/Tools
 License  : MIT
@@ -79,15 +79,15 @@ python3 components for the dogpile.cache package.
 
 
 %prep
-%setup -q -n dogpile.cache-1.0.0
-cd %{_builddir}/dogpile.cache-1.0.0
+%setup -q -n dogpile.cache-1.0.1
+cd %{_builddir}/dogpile.cache-1.0.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1595256379
+export SOURCE_DATE_EPOCH=1595428650
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -100,7 +100,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dogpile.cache
-cp %{_builddir}/dogpile.cache-1.0.0/LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/36f7c292180b27f76a08c269d3f77cdf8f7da681
+cp %{_builddir}/dogpile.cache-1.0.1/LICENSE %{buildroot}/usr/share/package-licenses/dogpile.cache/36f7c292180b27f76a08c269d3f77cdf8f7da681
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :

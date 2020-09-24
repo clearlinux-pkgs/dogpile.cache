@@ -6,7 +6,7 @@
 #
 Name     : dogpile.cache
 Version  : 1.0.2
-Release  : 57
+Release  : 58
 URL      : https://files.pythonhosted.org/packages/53/05/f8445598250e0237aeaf0d82301f56ee5550b7d4d24dcdd44c7425c50497/dogpile.cache-1.0.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/53/05/f8445598250e0237aeaf0d82301f56ee5550b7d4d24dcdd44c7425c50497/dogpile.cache-1.0.2.tar.gz
 Source1  : https://files.pythonhosted.org/packages/53/05/f8445598250e0237aeaf0d82301f56ee5550b7d4d24dcdd44c7425c50497/dogpile.cache-1.0.2.tar.gz.asc
